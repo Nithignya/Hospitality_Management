@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Table Booking</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 18px;
+			background-image: url('tab.jpg');
+			background-size: cover;
+			background-position: center;
+			color: #fff; /* White font color */
+		}
+		.title { 
+			text-align: center;
+			margin-bottom: 50px;
+		}
+		.form-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+		form {
+			background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+		label {
+			display: block;
+			margin-bottom: 10px;
+			color: #fff; /* White font color */
+		}
+		input[type="number"], input[type="datetime-local"] {
+			color: #000; /* Change text color to black */
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+		button[type="button"] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="title">
+		<h2>Table Booking</h2>
+	</div>
+	<div class="form-container">
+		<form>
+			<label for="tables">Number of Tables:</label>
+			<input type="number" id="tables" name="tables" required>
+			<label for="guests">Number of Guests:</label>
+			<input type="number" id="guests" name="guests" required>
+			<label for="duration">Duration (hours):</label>
+			<input type="number" id="duration" name="duration" required>
+			<button type="button" onclick="calculateCost()">Calculate Cost</button>
+			<div id="costDetails"></div>
+		</form>
+	</div>
+	<script>
+		function calculateCost() {
+			var tables = document.getElementById("tables").value;
+			var guests = document.getElementById("guests").value;
+			var duration = document.getElementById("duration").value;
+			
+			// Table rates (per hour)
+			var tableRates = {
+				"Small Table": 500,
+				"Medium Table": 750,
+				"Large Table": 1000
+			};
+			
+			// Food and beverage rates (per guest)
+			var fandbRates = {
+				"Basic": 200,
+				"Standard": 350,
+				"Premium": 500
+			};
+			
+			// Calculate total cost
+			var totalCost = 0;
+			totalCost += tableRates["Medium Table"] * tables * duration; // Assuming medium table
+			totalCost += fandbRates["Standard"] * guests; // Assuming standard food and beverage
+			
+			// Display total cost
+			document.getElementById("costDetails").innerHTML = "Total Cost: ₹" + totalCost + "<br>Breakdown:<br>Tables: ₹" + tableRates["Medium Table"] * tables * duration + "<br>Food and Beverage: ₹" + fandbRates["Standard"] * guests;
+		}
+	</script>
+</body>
+</html>
