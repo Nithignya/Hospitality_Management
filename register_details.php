@@ -30,7 +30,7 @@ if (isset($_POST['save'])) {
 
     // Prepare and bind
     $stmt = $conn->prepare("INSERT INTO register (name, age, address, email, hobby, gender, country, service) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sissssss", $name, $age, $address, $email, $hobbies, $gender, $country, $service);
+    $stmt->bind_param("ssssssss", $name, $age, $address, $email, $hobbies, $gender, $country, $service);
 
     if ($stmt->execute()) {
         header("Location: Log.html");
